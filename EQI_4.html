@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -149,13 +183,13 @@ window.Quarto = {
 <p>Na prática não se conhece <span class="math inline">\(\mu\)</span> e <span class="math inline">\(\sigma\)</span>, sugerindo-se usar <span class="math inline">\(m\)</span> de 20 a 25 amostras de tamanho <span class="math inline">\(n\)</span> para estimativa dos parâmetros e cálculo dos limites de controle. A Tabela a seguir sugere como as amostras podem ser organizadas para monitorar o processo.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 10%">
 <col style="width: 12%">
-<col style="width: 38%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -164,7 +198,7 @@ window.Quarto = {
 <th><span class="math inline">\(x_2\)</span></th>
 <th><span class="math inline">\(\dots\)</span></th>
 <th><span class="math inline">\(x_n\)</span></th>
-<th><span class="math inline">\(\bar{x}\)</span></th>
+<th><span class="math inline">\(\overline{x}\)</span></th>
 <th><span class="math inline">\(R\)</span></th>
 </tr>
 </thead>
@@ -175,7 +209,7 @@ window.Quarto = {
 <td><span class="math inline">\(x_{12}\)</span></td>
 <td><span class="math inline">\(\dots\)</span></td>
 <td><span class="math inline">\(x_{1n}\)</span></td>
-<td><span class="math inline">\(\bar{x}_1\)</span></td>
+<td><span class="math inline">\(\overline{x}_1\)</span></td>
 <td><span class="math inline">\(x_{1\text{(max)}} -x_{1\text{(min)}}\)</span></td>
 </tr>
 <tr class="even">
@@ -184,7 +218,7 @@ window.Quarto = {
 <td><span class="math inline">\(x_{22}\)</span></td>
 <td><span class="math inline">\(\dots\)</span></td>
 <td><span class="math inline">\(x_{2n}\)</span></td>
-<td><span class="math inline">\(\bar{x}_2\)</span></td>
+<td><span class="math inline">\(\overline{x}_2\)</span></td>
 <td><span class="math inline">\(x_{2\text{(max)}} -x_{2\text{(min)}}\)</span></td>
 </tr>
 <tr class="odd">
@@ -202,26 +236,26 @@ window.Quarto = {
 <td><span class="math inline">\(x_{m2}\)</span></td>
 <td><span class="math inline">\(\dots\)</span></td>
 <td><span class="math inline">\(x_{mn}\)</span></td>
-<td><span class="math inline">\(\bar{x}_m\)</span></td>
+<td><span class="math inline">\(\overline{x}_m\)</span></td>
 <td><span class="math inline">\(x_{m\text{(max)}} -x_{m\text{(min)}}\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>Para cada amostra pode-se calcular a média <span class="math inline">\(\bar x_j\)</span> e a amplitude <span class="math inline">\(R = x_{j\text{(max)}} -x_{j\text{(min)}}\)</span>, <span class="math inline">\(j=1,...,m\)</span>, conforme as últimas duas colunas da tabela, para monitorar causas especiais e comuns, respectivamente.</p>
+<p>Para cada amostra pode-se calcular a média <span class="math inline">\(\overline x_j\)</span> e a amplitude <span class="math inline">\(R = x_{j\text{(max)}} -x_{j\text{(min)}}\)</span>, <span class="math inline">\(j=1,...,m\)</span>, conforme as últimas duas colunas da tabela, para monitorar causas especiais e comuns, respectivamente.</p>
 <p>A estimativa para a média geral será:</p>
 <p><span class="math display">\[
-\bar{\bar{x}} = \frac{\bar x_1+\bar x_2+...+\bar x_m}{m}= \frac{\sum_{j=1}^m \bar x_j}{m}.
+\overline{\overline{x}} = \frac{\overline x_1+\overline x_2+...+\overline x_m}{m}= \frac{\sum_{j=1}^m \overline x_j}{m}.
 \]</span></p>
 <p>Já a média das amplitudes ou a amplitude média será:</p>
 <p><span class="math display">\[
 \overline R = \frac{R_1 + R_2 + ... R_m}{m} =  \frac{\sum_{j=1}^m R_j}{m}.
 \]</span></p>
-<p>Os limites de controle para a carta <span class="math inline">\(\bar x\)</span> podem ser estimados conforme segue:</p>
+<p>Os limites de controle para a carta <span class="math inline">\(\overline x\)</span> podem ser estimados conforme segue:</p>
 <p><span class="math display">\[
 \begin{align}
-LSC =&amp;\text{ } \bar{\bar{x}} + A_2\overline R\\
-LC =&amp;\text{ } \bar{\bar{x}} \\
-LIC =&amp;\text{ } \bar{\bar{x}} - A_2\overline R,\\
+LSC =&amp;\text{ } \overline{\overline{x}} + A_2\overline R\\
+LC =&amp;\text{ } \overline{\overline{x}} \\
+LIC =&amp;\text{ } \overline{\overline{x}} - A_2\overline R,\\
 \end{align}
 \]</span></p>
 <p>onde <span class="math inline">\(A_2\)</span> é uma constante tabelada que varia segundo o tamanho amostral, <span class="math inline">\(n\)</span>. Já os limites da carta para a amplitude podem ser estimados conforme segue:</p>
@@ -269,12 +303,12 @@ LIC =&amp;\text{ } D_3\overline R,\\
 </tbody>
 </table>
 <p>Recomenda-se, portanto, <span class="math inline">\(n\leq6\)</span> para cartas x-barra e R.</p>
-<p>Se <span class="math inline">\(\bar{\bar{x}}\)</span> é um estimador não enviesado de <span class="math inline">\(\mu\)</span> e <span class="math inline">\(R/d_2\)</span> um estimador não enviesado de <span class="math inline">\(\sigma\)</span>, então a carta <span class="math inline">\(\bar x\)</span> fica:</p>
+<p>Se <span class="math inline">\(\overline{\overline{x}}\)</span> é um estimador não enviesado de <span class="math inline">\(\mu\)</span> e <span class="math inline">\(R/d_2\)</span> um estimador não enviesado de <span class="math inline">\(\sigma\)</span>, então a carta <span class="math inline">\(\overline x\)</span> fica:</p>
 <p><span class="math display">\[
 \begin{align}
-LSC =&amp;\text{ } \bar{\bar{x}} + \frac{3}{d_2\sqrt{n}}\overline R\\
-LC =&amp;\text{ } \bar{\bar{x}} \\
-LIC =&amp;\text{ } \bar{\bar{x}} - \frac{3}{d_2\sqrt{n}}\overline R,\\
+LSC =&amp;\text{ } \overline{\overline{x}} + \frac{3}{d_2\sqrt{n}}\overline R\\
+LC =&amp;\text{ } \overline{\overline{x}} \\
+LIC =&amp;\text{ } \overline{\overline{x}} - \frac{3}{d_2\sqrt{n}}\overline R,\\
 \end{align}
 \]</span></p>
 <p>porém, para facilitar o trabalho, a constante <span class="math inline">\(A_2 = 3/(d_2\sqrt{n})\)</span> foi definida e tabelada segundo o tamanho amostral, de forma que os limites de controle fiquem conforme especificado inicialmente.</p>
@@ -287,6 +321,517 @@ LIC =&amp; \overline{R}- 3\sigma_R = \overline{R} - 3d_3\frac{\overline{R}}{d_2}
 \end{align}
 \]</span></p>
 <p>Para facilitar os cálculos, foram definidos as constantes <span class="math inline">\(D_3 = 1 - 3\frac{d_3}{d_2}\)</span> e <span class="math inline">\(D_4 = 1 + 3\frac{d_3}{d_2}\)</span>, de forma que os limites expostos acima ficam conforme os expostos inicialmente.</p>
+<section id="implementação" class="level3">
+<h3 class="anchored" data-anchor-id="implementação">Implementação</h3>
+<p>Exemplo: Uma empresa utiliza o controle estatístico de qualidade para controlar sua linha de produção de conservas de tomate. Diversas vezes, durante o turno nessa fábrica de conservas, um inspetor retirava da linha de produção 5 latas que haviam sido enchidas e seladas. O inspetor abria cada lata, esvaziava e pesava o conteúdo sólido, registrando os resultados. A tabela abaixo mostra os resultados da medição do peso drenado, abrangendo 11 dias de operação.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tomate <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"tomate.csv"</span>, <span class="at">header=</span>T)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tomate</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Subgrupo     Data    Tempo  X1  X2  X3  X4  X5
+1         1 Sept. 21 09:30:00 624 638 638 680 666
+2         2 Sept. 21 10:50:00 581 638 638 652 610
+3         3 Sept. 21 11:45:00 567 581 652 624 610
+4         4 Sept. 21 14:30:00 595 624 624 652 624
+5         5 Sept. 21 17:25:00 638 553 638 624 595
+6         6 Sept. 22 10:00:00 652 666 595 624 567
+7         7 Sept. 22 13:15:00 539 567 624 581 638
+8         8 Sept. 22 17:00:00 610 581 539 553 553
+9         9 Sept. 23 09:30:00 595 638 567 624 624
+10       10 Sept. 23 13:15:00 610 652 624 652 524
+11       11 Sept. 23 13:45:00 567 553 595 567 581
+12       12 Sept. 23 15:30:00 539 595 595 595 581
+13       13 Sept. 25 08:00:00 553 581 595 581 595
+14       14 Sept. 25 10:25:00 567 610 680 652 567
+15       15 Sept. 25 11:30:00 638 553 595 610 595
+16       16 Sept. 25 14:30:00 610 581 624 610 666
+17       17 Sept. 25 15:15:00 539 610 652 595 666
+18       18 Sept. 25 17:30:00 595 581 553 624 595
+19       19 Sept. 26 14:00:00 567 666 680 581 610
+20       20 Sept. 26 15:00:00 624 581 595 638 567
+21       21 Sept. 26 16:45:00 539 581 595 581 638
+22       22 Sept. 27 07:30:00 610 709 595 539 595
+23       23 Sept. 27 08:35:00 638 624 652 624 666
+24       24 Sept. 27 10:40:00 638 624 624 553 581
+25       25 Sept. 27 13:45:00 524 624 638 595 610
+26       26 Sept. 27 15:30:00 610 581 581 468 610
+27       27 Sept. 27 16:00:00 680 624 496 595 638
+28       28 Sept. 28 07:15:00 624 496 595 624 666
+29       29 Sept. 28 07:45:00 624 567 581 680 610
+30       30 Sept. 28 10:00:00 638 595 553 610 638
+31       31 Sept. 28 13:15:00 567 624 567 610 567
+32       32 Sept. 28 15:30:00 595 553 624 567 567
+33       33 Sept. 29 09:00:00 638 610 595 610 666
+34       34 Sept. 29 10:50:00 624 595 595 581 595
+35       35 Sept. 29 13:15:00 709 567 567 581 638
+36       36 Sept. 29 14:30:00 581 595 595 539 595
+37       37 Sept. 29 16:10:00 610 624 624 567 595
+38       38 Sept. 29 17:20:00 610 624 610 581 638
+39       39 Sept. 30 09:30:00 638 695 723 567 595
+40       40 Sept. 30 11:15:00 610 680 610 610 638
+41       41 Sept. 30 14:10:00 652 666 595 610 610
+42       42 Sept. 30 15:30:00 638 553 610 581 567
+43       43   Oct. 2 08:20:00 666 652 695 610 581
+44       44   Oct. 2 14:30:00 595 595 695 652 638
+45       45   Oct. 2 15:30:00 695 610 610 638 638
+46       46   Oct. 2 17:00:00 680 595 680 624 581
+47       47   Oct. 3 09:15:00 666 638 567 567 595
+48       48   Oct. 3 10:00:00 624 581 595 638 652
+49       49   Oct. 3 13:00:00 624 666 680 624 624
+50       50   Oct. 3 15:00:00 666 595 666 610 652</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qcc)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qcc.options</span>(<span class="at">bg.margin =</span> <span class="st">"white"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Serão implementadas as cartas R e x-barra para estimar os limites de controle.</p>
+<p>Carta R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dados_tomate <span class="ot">&lt;-</span> tomate[,<span class="dv">4</span><span class="sc">:</span><span class="dv">8</span>] </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cartaR_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">type=</span><span class="st">"R"</span>, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">title =</span> <span class="st">"Carta R para a massa de conservas de tomate"</span>, <span class="at">ylab =</span> <span class="st">"R"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cartaR_tomate)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+qcc(data = dados_tomate[1:25, ], type = "R", title = "Carta R para a massa de conservas de tomate",     ylab = "R")
+
+R chart for dados_tomate[1:25, ] 
+
+Summary of group statistics:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  42.00   71.00   85.00   85.48   99.00  170.00 
+
+Group sample size:  5
+Number of groups:  25
+Center of group statistics:  85.48
+Standard deviation:  36.74979 
+
+Control limits:
+ LCL      UCL
+   0 180.7449</code></pre>
+</div>
+</div>
+<p>Carta x-barra com desvio-padrão da média estimado via amplitude média.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cartaxbar_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-R"</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>, </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cartaxbar_tomate)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+qcc(data = dados_tomate[1:25, ], type = "xbar", std.dev = "UWAVE-R",     title = "Carta x-barra para a massa de conservas de tomate",     ylab = "x-barra")
+
+xbar chart for dados_tomate[1:25, ] 
+
+Summary of group statistics:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+567.200 589.800 609.600 605.696 618.200 649.200 
+
+Group sample size:  5
+Number of groups:  25
+Center of group statistics:  605.696
+Standard deviation:  36.74979 
+
+Control limits:
+     LCL     UCL
+ 556.391 655.001</code></pre>
+</div>
+</div>
+<p>Carta x-barra sem as estatísticas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cartaxbar_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], <span class="at">add.stats=</span><span class="cn">FALSE</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-R"</span>, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="cartas-de-controle-x-barra-e-s" class="level2">
+<h2 class="anchored" data-anchor-id="cartas-de-controle-x-barra-e-s">Cartas de controle x-barra e s</h2>
+<p>Apesar da simplicidade da carta <span class="math inline">\(R\)</span>, em alguns casos pode ser interessante o uso da carta do desvio-padrão, <span class="math inline">\(s\)</span>, para monitorar causas comuns de variação. Em geral quando (i) o tamanho amostral, <span class="math inline">\(n\)</span>, é grande e (ii) quando <span class="math inline">\(n\)</span> varia por amostra.</p>
+<p>Seja a variância amostral,</p>
+<p><span class="math display">\[
+s^2 =\sum_{i=1}^n\frac{(x_i-\overline x)^2}{n-1},
+\]</span></p>
+<p>um estimador não-enviesado para a variância populacional, isto é, <span class="math inline">\(E(s^2)=E(\sigma^2)\)</span>. Porém, o desvio-padrão amostral, <span class="math inline">\(s\)</span>, não é um estimador não enviesado para o desvio-padrão populacional, <span class="math inline">\(\sigma\)</span>. Pode-se mostrar que</p>
+<p><span class="math display">\[
+E(s)=\biggl(\frac{2}{n-1}\biggr) \frac{\Gamma(n/2)}{\Gamma[ (n-1)/2 ]}\sigma = c_4\sigma,
+\]</span></p>
+<p>onde <span class="math inline">\(c_4\)</span> é uma constante que varia segundo o tamanhoa amostral. Logo, uma estimativa não enviesada para <span class="math inline">\(\sigma\)</span> fica conforme segue.</p>
+<p><span class="math display">\[
+\hat \sigma = \frac{s}{c_4}
+\]</span></p>
+<p>Ademais, também é possível provar que o desvio-padrão de <span class="math inline">\(s\)</span> é igual a <span class="math inline">\(\sigma \sqrt{1-c_4^2}\)</span>.</p>
+<p>Logo, os limites de controle para a carta <span class="math inline">\(s\)</span> ficam:</p>
+<p><span class="math display">\[
+\begin{align}
+LSC =&amp; s + 3\sigma_s = c_4\sigma + \sigma \sqrt{1-c_4^2}\\
+LC =&amp; s = c_4\sigma\\
+LIC =&amp; s - 3\sigma_s = c_4\sigma - \sigma \sqrt{1-c_4^2}\\
+\end{align}
+\]</span></p>
+<p>Tomando os limites e colocando <span class="math inline">\(\sigma\)</span> em evidência é possível definir novas constantes, <span class="math inline">\(B_6=c_4 + \sqrt{1-c_4^2}\)</span> e <span class="math inline">\(B_5=c_4 - \sqrt{1-c_4^2}\)</span>. Logo, os limites podem ser simplificados para:</p>
+<p><span class="math display">\[
+\begin{align}
+LSC =&amp; B_6\sigma\\
+LC =&amp; c_4\sigma\\
+LIC =&amp; B_5\sigma\\
+\end{align}
+\]</span></p>
+<p>Em muitas situações práticas não há um valor de referência para <span class="math inline">\(\sigma\)</span>. Logo, deve-se estimar <span class="math inline">\(\sigma\)</span> a partir de dados amostrais. Sejam <span class="math inline">\(m\)</span> amostras de tamanho <span class="math inline">\(n\)</span> e seja o desvio-padrão da i-ésima amostra, <span class="math inline">\(s_i\)</span>. A média dos <span class="math inline">\(m\)</span> desvios padrão é</p>
+<p><span class="math display">\[\overline s=  \frac{\sum_{i=1}^ms_i}{m}.\]</span></p>
+<p>A estatística <span class="math inline">\(\overline s/c_4\)</span> é um estimador não enviesado de <span class="math inline">\(\sigma\)</span>. Logo:</p>
+<p><span class="math display">\[
+\begin{align}
+LSC =&amp; \overline s + 3 \frac{\overline s}{c_4}\sqrt{1-c_4^2}\\
+LC =&amp; \overline s\\
+LIC =&amp; \overline s - 3 \frac{\overline s}{c_4}\sqrt{1-c_4^2}\\
+\end{align}
+\]</span></p>
+<p>De forma análoga, colocando <span class="math inline">\(\overline s\)</span> em evidência, pode-se definir novas constantes <span class="math inline">\(B_3=1 - \frac{3}{c_4}\sqrt{1-c_4^2}\)</span> e <span class="math inline">\(B_4=1 + \frac{3}{c_4}\sqrt{1-c_4^2}\)</span>, simplificando a carta, conforme segue.</p>
+<p><span class="math display">\[
+\begin{align}
+LSC =&amp; B_4{\overline s}\\
+LC =&amp; \overline s\\
+LIC =&amp; B_3{\overline s}\\
+\end{align}
+\]</span></p>
+<p>É importante recordar que quando usamos a carta <span class="math inline">\(R\)</span> para monitorar causa comum, o desvio-padrão da média, necessário à carta <span class="math inline">\(\overline x\)</span>, era estimado a partir da média das amplitudes. Logo, quando usa-se a carta <span class="math inline">\(s\)</span>, pode-se estimar <span class="math inline">\(\sigma_{\overline x}\)</span> como <span class="math inline">\(\sigma_{\overline x} = \overline s /(c_4\sqrt n)\)</span>. Logo, a carta <span class="math inline">\(\overline x\)</span> fica conforme segue.</p>
+<p><span class="math display">\[
+\begin{align}
+LSC =&amp;\text{ } \overline{\overline{x}} + \frac{3}{c_4\sqrt{n}}\overline s\\
+LC =&amp;\text{ } \overline{\overline{x}} \\
+LIC =&amp;\text{ } \overline{\overline{x}} - \frac{3}{c_4\sqrt{n}}\overline s,\\
+\end{align}
+\]</span></p>
+<p>Fazendo <span class="math inline">\(A_3=3/(c_4\sqrt n)\)</span>, tem-se os limites da carta <span class="math inline">\(\overline x\)</span> estimados via <span class="math inline">\(\overline s\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+LSC =&amp;\text{ } \overline{\overline{x}} + A_3\overline s\\
+LC =&amp;\text{ } \overline{\overline{x}} \\
+LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
+\end{align}
+\]</span></p>
+<p>No início do CEQ usar a carta <span class="math inline">\(R\)</span> era mais cômodo, dada a facilidade do cálculo da amplitue amostral. Porém, hoje, com a disponibilidade de calculadoras científicas e computadores o cálculo de <span class="math inline">\(s\)</span> é realizado facilmente. Ademais, o advento dos pacotes computacionais estatísticos, por exemplo a linguagem <code>R</code> e o pacote <code>qcc</code> facilitam muito a obtenção dos limites, bastando entrar com os dados no formato apropriado e escolher a carta adequada.</p>
+<section id="implementação-1" class="level3">
+<h3 class="anchored" data-anchor-id="implementação-1">Implementação</h3>
+<p>Carta s.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cartaS_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">type=</span><span class="st">"S"</span>, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">title =</span> <span class="st">"Carta S para a massa de conservas de tomate"</span>, <span class="at">ylab =</span> <span class="st">"S"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Carta x-barra com desvio-padrão da média estimado via média dos desvios-padrão.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cartaxbar_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-SD"</span>, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fases-i-e-ii-do-ceq" class="level2">
+<h2 class="anchored" data-anchor-id="fases-i-e-ii-do-ceq">Fases I e II do CEQ</h2>
+<p>O controle estatístico é geralmente realizado em duas fases. A primeira fase é a de estimativa dos limites de controle. Nesta fase são coletadas de <span class="math inline">\(m=20\)</span> a <span class="math inline">\(25\)</span> amostras de tamanho <span class="math inline">\(n\)</span> para estimar os limites de controle. Caso algum ponto apareça fora de controle, sugere-se realizar um plano de ação, por exempo empregando ferramentas de qualidade e encontrar a causa de variação atribuível à amostra em questão para eliminá-la e continuar o processo de estimativa dos limites de controle.</p>
+<p>A segunda fase consiste no monitoramento da produção futura com os limites estimados na primeira fase. Nesta fase a coleta de amostras continua com a mesma periodicidade e novas observações são plotadas na carta. A diferença é que as observações futuras não são usadas para definir os limites de controle. Estes foram definidos anteriormente na primeira fase e deseja-se que o processo de controle permaneça estável, objetivo este da segunda fase.</p>
+<p>É importante atualizar os limites de controle com certa frequência, de acordo com mudanças realizadas no processo ou até mesmo a necessidade de passar para um nível de variabilidade mais baixo (estreitar os limites), após alguma melhoria no processo.</p>
+<section id="implementação-2" class="level3">
+<h3 class="anchored" data-anchor-id="implementação-2">Implementação</h3>
+<p>Carta R com dados futuros.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cartaR_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">newdata =</span> dados_tomate[<span class="dv">26</span><span class="sc">:</span><span class="dv">50</span>,],</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">type=</span><span class="st">"R"</span>, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">title =</span> <span class="st">"Carta R para a massa de conservas de tomate"</span>, <span class="at">ylab =</span> <span class="st">"R"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Carta x-barra com dados futuros.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>xbarfuture <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], <span class="at">newdata =</span> dados_tomate[<span class="dv">26</span><span class="sc">:</span><span class="dv">50</span>,],</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-SD"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Carta x-barra com dados futuros sem dados da primeira fase.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>xbarfuture2 <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], <span class="at">newdata =</span> dados_tomate[<span class="dv">26</span><span class="sc">:</span><span class="dv">50</span>,],</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-SD"</span>, <span class="at">chart.all=</span><span class="cn">FALSE</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="critérios-para-determinar-se-um-processo-está-sob-controle-estatístico-ou-não" class="level2">
+<h2 class="anchored" data-anchor-id="critérios-para-determinar-se-um-processo-está-sob-controle-estatístico-ou-não">Critérios para determinar se um processo está sob controle estatístico ou não</h2>
+<p>O critério principal para dizer que um processo não está sob controle estatístico é a partir da observação de um ou mais pontos fora dos limites de controle.</p>
+<p>A seguir são listadas outras regras que podem ser usadas na prática para as cartas de Shewart. As quatro primeiras foram definidas pela <em>Western Electric</em>.</p>
+<ol type="1">
+<li>Um ou mais pontos fora dos limites de controle;</li>
+<li>Dois de três pontos consecutivos fora dos limites de alerta de dois sigma, mas ainda dentro dos limites de controle;</li>
+<li>Quatro de cinco pontos consecutivos além dos limites de um sigma;</li>
+<li>Uma sequência de oito pontos consecutivos em um lado da linha central</li>
+<li>Seis pontos consecutivos aumentando ou diminuindo constantemente;</li>
+<li>Quinze pontos consecutivos na zona C (acima e abaixo da linha central);</li>
+<li>Quatorze pontos consecutivos alternando para cima e para baixo;</li>
+<li>Oito pontos consecutivos em ambos os lados da linha central sem nenhum na zona C;</li>
+<li>Um padrão incomum ou não aleatório nos dados;</li>
+<li>Um ou mais pontos próximos a um limite de alerta ou controle.</li>
+</ol>
+<p>A seguir exemplica-se como identificar tais padrões indesejados nas cartas.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>É importante alertar que o excesso de regras pode gerar alarmes falsos. Conforme observados algumas regras são redundantes e em algumas situações alguns padrões podem aparecer sem clara indicação de um processo fora de controle. Ademais o excesso de regras pode dificultar o monitoramento. O ideal é que se considere pontos fora de controle, ou seja, a primeira regra como a principal. Porém, mesmo a primeira regra pode estar relacionada a um alarme falso, ou erro do tipo I.</p>
+<section id="implementação-3" class="level3">
+<h3 class="anchored" data-anchor-id="implementação-3">Implementação</h3>
+<p>Carta x-barra com limites de aviso de 2 sigma.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cartaxbar <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-R"</span>, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>, </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab =</span> <span class="st">"x-barra"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>limites.aviso <span class="ot">&lt;-</span> <span class="fu">limits.xbar</span>(cartaxbar<span class="sc">$</span>center, cartaxbar<span class="sc">$</span>std.dev, cartaxbar<span class="sc">$</span>sizes, <span class="dv">2</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cartaxbar, <span class="at">restore.par =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> limites.aviso, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"orangered"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="prova-que-es-c_4sigma" class="level3">
+<h3 class="anchored" data-anchor-id="prova-que-es-c_4sigma">Prova que <span class="math inline">\(E(s) = c_4\sigma\)</span></h3>
+<p>Vamos demonstrar que o valor esperado do desvio padrão amostral é dado por:</p>
+<p><span class="math display">\[E(s) = \sqrt{\frac{2}{n-1}} \frac{\Gamma\left(\frac{n}{2}\right)}{\Gamma\left(\frac{n-1}{2}\right)} \sigma = c_4 \sigma\]</span></p>
+<section id="definição-do-desvio-padrão-amostral" class="level4">
+<h4 class="anchored" data-anchor-id="definição-do-desvio-padrão-amostral">1. Definição do Desvio Padrão Amostral</h4>
+<p>O desvio padrão amostral é definido como:</p>
+<p><span class="math display">\[s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{x})^2}\]</span></p>
+<p>onde <span class="math inline">\(\overline{x}\)</span> é a média amostral.</p>
+</section>
+<section id="distribuição-de-s" class="level4">
+<h4 class="anchored" data-anchor-id="distribuição-de-s">2. Distribuição de <span class="math inline">\(s\)</span></h4>
+<p>Assumindo que <span class="math inline">\(X_i \sim N(\mu, \sigma^2)\)</span> i.i.d., sabemos que:</p>
+<p><span class="math display">\[\frac{(n-1)s^2}{\sigma^2} \sim \chi^2_{n-1}\]</span></p>
+</section>
+<section id="cálculo-de-es" class="level4">
+<h4 class="anchored" data-anchor-id="cálculo-de-es">3. Cálculo de <span class="math inline">\(E(s)\)</span></h4>
+<p>Podemos expressar <span class="math inline">\(s\)</span> em termos da distribuição qui-quadrado:</p>
+<p><span class="math display">\[s = \sigma \sqrt{\frac{\chi^2_{n-1}}{n-1}}\]</span></p>
+<p>Portanto:</p>
+<p><span class="math display">\[E(s) = \sigma E\left(\sqrt{\frac{\chi^2_{n-1}}{n-1}}\right) = \frac{\sigma}{\sqrt{n-1}} E\left(\sqrt{\chi^2_{n-1}}\right)\]</span></p>
+</section>
+<section id="esperança-da-raiz-quadrada-de-chi2" class="level4">
+<h4 class="anchored" data-anchor-id="esperança-da-raiz-quadrada-de-chi2">4. Esperança da Raiz Quadrada de <span class="math inline">\(\chi^2\)</span></h4>
+<p>Para uma variável qui-quadrado com <span class="math inline">\(\nu\)</span> graus de liberdade:</p>
+<p><span class="math display">\[E\left(\sqrt{\chi^2_{\nu}}\right) = \sqrt{2} \frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\Gamma\left(\frac{\nu}{2}\right)}\]</span></p>
+<p>Aplicando para <span class="math inline">\(\nu = n-1\)</span>:</p>
+<p><span class="math display">\[E\left(\sqrt{\chi^2_{n-1}}\right) = \sqrt{2} \frac{\Gamma\left(\frac{n}{2}\right)}{\Gamma\left(\frac{n-1}{2}\right)}\]</span></p>
+</section>
+<section id="resultado-final" class="level4">
+<h4 class="anchored" data-anchor-id="resultado-final">5. Resultado Final</h4>
+<p>Substituindo:</p>
+<p><span class="math display">\[E(s) = \frac{\sigma}{\sqrt{n-1}} \cdot \sqrt{2} \frac{\Gamma\left(\frac{n}{2}\right)}{\Gamma\left(\frac{n-1}{2}\right)} = \sigma \cdot \sqrt{\frac{2}{n-1}} \frac{\Gamma\left(\frac{n}{2}\right)}{\Gamma\left(\frac{n-1}{2}\right)}\]</span></p>
+<p>Portanto:</p>
+<p><span class="math display">\[c_4 = \sqrt{\frac{2}{n-1}} \frac{\Gamma\left(\frac{n}{2}\right)}{\Gamma\left(\frac{n-1}{2}\right)}\]</span></p>
+</section>
+</section>
+<section id="verificação-numérica-em-r" class="level3">
+<h3 class="anchored" data-anchor-id="verificação-numérica-em-r">Verificação Numérica em R</h3>
+<p>Podemos verificar o valor de <span class="math inline">\(c_4\)</span> para diferentes tamanhos amostrais:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9399856</code></pre>
+</div>
+</div>
+</section>
+<section id="prova-que-o-desvio-padrão-de-s-é-sigmasqrt1---c_42" class="level3">
+<h3 class="anchored" data-anchor-id="prova-que-o-desvio-padrão-de-s-é-sigmasqrt1---c_42">Prova que o desvio padrão de <span class="math inline">\(s\)</span> é <span class="math inline">\(\sigma\sqrt{1 - c_4^2}\)</span></h3>
+<p>Queremos demonstrar que:</p>
+<p><span class="math display">\[\sigma_s = \sigma \sqrt{1 - c_4^2}\]</span></p>
+<p>onde: - <span class="math inline">\(s\)</span> é o desvio padrão amostral - <span class="math inline">\(\sigma\)</span> é o desvio padrão populacional - <span class="math inline">\(c_4\)</span> é o fator de correção para amostras finitas</p>
+<section id="relação-entre-variância-de-s-e-s2" class="level4">
+<h4 class="anchored" data-anchor-id="relação-entre-variância-de-s-e-s2">1. Relação entre Variância de <span class="math inline">\(s\)</span> e <span class="math inline">\(s^2\)</span></h4>
+<p>Sabemos que: <span class="math display">\[\text{Var}(s) = E(s^2) - [E(s)]^2\]</span></p>
+<p>Mas <span class="math inline">\(E(s^2) = \sigma^2\)</span> (estimador não viesado da variância)</p>
+<p>E já demonstramos anteriormente que <span class="math inline">\(E(s) = c_4 \sigma\)</span></p>
+<p>Portanto: <span class="math display">\[\text{Var}(s) = \sigma^2 - (c_4 \sigma)^2 = \sigma^2 (1 - c_4^2)\]</span></p>
+</section>
+<section id="desvio-padrão-de-s" class="level4">
+<h4 class="anchored" data-anchor-id="desvio-padrão-de-s">2. Desvio Padrão de <span class="math inline">\(s\)</span></h4>
+<p>Tomando a raiz quadrada da variância: <span class="math display">\[\sigma_s = \sqrt{\text{Var}(s)} = \sqrt{\sigma^2 (1 - c_4^2)} = \sigma \sqrt{1 - c_4^2}\]</span></p>
+</section>
+<section id="verificação-da-fórmula-de-c_4" class="level4">
+<h4 class="anchored" data-anchor-id="verificação-da-fórmula-de-c_4">3. Verificação da Fórmula de <span class="math inline">\(c_4\)</span></h4>
+<p>Recordemos a definição de <span class="math inline">\(c_4\)</span>: <span class="math display">\[c_4 = \sqrt{\frac{2}{n-1}} \frac{\Gamma\left(\frac{n}{2}\right)}{\Gamma\left(\frac{n-1}{2}\right)}\]</span></p>
+</section>
+<section id="verificação-numérica-em-r-1" class="level4">
+<h4 class="anchored" data-anchor-id="verificação-numérica-em-r-1">4. Verificação Numérica em R</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Observado   Teórico         Erro
+1 0.4653479 0.4644736 0.0008743116</code></pre>
+</div>
+</div>
+</section>
+</section>
 </section>
 
 </main>
