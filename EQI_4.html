@@ -183,13 +183,13 @@ window.Quarto = {
 <p>Na prática não se conhece <span class="math inline">\(\mu\)</span> e <span class="math inline">\(\sigma\)</span>, sugerindo-se usar <span class="math inline">\(m\)</span> de 20 a 25 amostras de tamanho <span class="math inline">\(n\)</span> para estimativa dos parâmetros e cálculo dos limites de controle. A Tabela a seguir sugere como as amostras podem ser organizadas para monitorar o processo.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 25%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -474,6 +474,43 @@ Control limits:
 </div>
 </div>
 </div>
+<p>Realizando a implementação passo a passo (Atenção, aqui seria mais para entendimento e não para realização de prova, listas de exercícios e atuação profissional. Sugere-se usar extensivamente os pacotes, conforme feito inicialmente).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="cartas-de-controle-x-barra-e-s" class="level2">
@@ -553,7 +590,7 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -567,7 +604,7 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -590,7 +627,7 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -598,13 +635,13 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <p>Carta x-barra com dados futuros.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>xbarfuture <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], <span class="at">newdata =</span> dados_tomate[<span class="dv">26</span><span class="sc">:</span><span class="dv">50</span>,],</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-SD"</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-R"</span>,</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>,</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -618,7 +655,7 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -646,69 +683,6 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
 <p><img src="EQI_4_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
@@ -732,6 +706,69 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 </div>
 </div>
 </div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>É importante alertar que o excesso de regras pode gerar alarmes falsos. Conforme observados algumas regras são redundantes e em algumas situações alguns padrões podem aparecer sem clara indicação de um processo fora de controle. Ademais o excesso de regras pode dificultar o monitoramento. O ideal é que se considere pontos fora de controle, ou seja, a primeira regra como a principal. Porém, mesmo a primeira regra pode estar relacionada a um alarme falso, ou erro do tipo I.</p>
 <section id="implementação-3" class="level3">
 <h3 class="anchored" data-anchor-id="implementação-3">Implementação</h3>
@@ -750,7 +787,7 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="EQI_4_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -760,6 +797,119 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <h3 class="anchored" data-anchor-id="prova-que-es-c_4sigma">Prova que <span class="math inline">\(E(s) = c_4\sigma\)</span></h3>
 <p>Vamos demonstrar que o valor esperado do desvio padrão amostral é dado por:</p>
 <p><span class="math display">\[E(s) = \sqrt{\frac{2}{n-1}} \frac{\Gamma\left(\frac{n}{2}\right)}{\Gamma\left(\frac{n-1}{2}\right)} \sigma = c_4 \sigma\]</span></p>
+</section>
+</section>
+<section id="comprimetno-médio-da-sequência" class="level2">
+<h2 class="anchored" data-anchor-id="comprimetno-médio-da-sequência">Comprimetno médio da sequência</h2>
+<p>O comprimento médio da sequência (<em>average run length</em> - ARL) consiste no número médio de pontos ou amostras até uma observação ser plotada fora dos limites. Existem dois tipos de comprimento médio da sequência: um quando o processo está sob controle e um ponto é plotado fora, sendo este classificado como alarme falso; e outro quando o processo está de fato fora de controle e deseja-se saber o número médio de pontos necessários para que a carta identifique o desvio, ou seja, deseja-se medir a sensibilidade da carta à presença de causas especiais.</p>
+<section id="arl_0" class="level3">
+<h3 class="anchored" data-anchor-id="arl_0"><span class="math inline">\(ARL_0\)</span></h3>
+<p>Seja o comprimento médio da sequência para um processo sob controle estatístico:</p>
+<p><span class="math display">\[
+ARL_0 = \frac{1}{\alpha}
+\]</span></p>
+<p>onde <span class="math inline">\(alpha = 1 - \gamma\)</span>. Sabe-se que quando são considerados limites de 3 desvios-padrões, <span class="math inline">\(\gamma = 0,9973\)</span>. Logo, <span class="math inline">\(\alpha = 0,0027\)</span> na maioria dos casos. A seguir observa-se uma carta com 500 observações e apenas um ponto fora de controle. Neste caso o ponto fora de controle é da amostra 373, bem próximo do esperado. Trata-se de um alarme falso, o próprio padrão da carta não aponta indícios significativos de causa especial.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="arl_1" class="level3">
+<h3 class="anchored" data-anchor-id="arl_1"><span class="math inline">\(ARL_1\)</span></h3>
+<p>Quando o processo está fora de controle não necessariamente a carta identificará um ponto fora de controle rapidamente. Podem ser necessários produzir fora de controle durante o tempo, até que a carta aponte um ponto fora dos limites.</p>
+<p>Seja <span class="math inline">\(\beta\)</span> a probabilidade ou risco de a carta não detectar uma causa especial de variação. Suponha que a média, <span class="math inline">\(\mu\)</span>, quando está sob controle é <span class="math inline">\(\mu_0\)</span> e quando o processo está fora de controle é <span class="math inline">\(\mu_1 = \mu_0+k\sigma\)</span>, ou seja a média a média sob controle adicionada de um desvio de <span class="math inline">\(k\)</span> desvios-padrões. A probabilidade de não detectar o desvio a partir da primeira amostra plotada após a causa especial é:</p>
+<p><span class="math display">\[
+\beta = p(LIC \leq \overline x \leq LSC | \mu = \mu_0+k\sigma).
+\]</span></p>
+<p>Sabendo-se que os limites de controle da carta <span class="math inline">\(\overline{x}\)</span> são estimados como <span class="math inline">\(LIC/LSC = \overline{\overline{x}} \pm L\sigma/\sqrt{n}\)</span>, considere o caso onde a carta é padronizada, de forma que</p>
+<p><span class="math display">\[
+\overline z = \frac{\overline x - \mu}{\sigma/\sqrt{n}}.
+\]</span></p>
+<p>Neste caso os limites poderiam ser expressos como <span class="math inline">\(LIC/LSC =\pm L\)</span>, ou na maioria das cartas, <span class="math inline">\(LIC/LSC =\pm 3\)</span>. Logo:</p>
+<p><span class="math display">\[
+\beta = p(-L \leq \overline x \leq L | \mu = \mu_0+k\sigma).
+\]</span></p>
+<p>Tomando a média a ser plotada após a causa especial, tem-se que <span class="math inline">\(\overline x \to \mu_0 + k\sigma\)</span>. Padronizando a média antes de plotar na carta padronizada:</p>
+<p><span class="math display">\[
+\frac{\overline x - \mu_0}{\sigma/\sqrt{n}} = \frac{(\mu_0 + k\sigma) - \mu_0}{\sigma/\sqrt{n}} \simeq k\sqrt n.
+\]</span></p>
+<p>Logo,</p>
+<p><span class="math display">\[
+\beta = p(\overline z \leq L-k\sqrt{n}) - p(\overline z \leq -L-k\sqrt{n}) = \Phi(L-k\sqrt{n})-\Phi(-L-k\sqrt{n})
+\]</span></p>
+<p>Como <span class="math inline">\(\beta\)</span> é a probabilidade de a carta não detectar um desvio, <span class="math inline">\(1-\beta\)</span> seria a probabilidade de a carta plotar um ponto fora de cobtrole dado que há uma causa especial de variação presente no processo. Logo,</p>
+<p><span class="math display">\[
+ARL_1 =  \frac{1}{1-\beta}.
+\]</span></p>
+<p>A seguir plotam-se curvas característica de operação para distintos tamanhos amostrais. Observa-se que o erro <span class="math inline">\(\beta\)</span> diminui à medida que aumenta um tamanho amostral para um <span class="math inline">\(k\)</span> fixo. Ou para um tamanho amostraç <span class="math inline">\(n\)</span> fixo, observa-se que quanto maior o deslocamento na média <span class="math inline">\(k\)</span>, menor o risco de a carta não detectar a causa especial.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Abaixo observa-se um caso onde após o estabelecimento dos limites, no início do controle da produção futura, aconteceu um desvio no processo de <span class="math inline">\(1,5\sigma\)</span> (<span class="math inline">\(k=1,5\)</span>) na média do processo.. Observa-se que na segunda amostra a carta identificou o desvio, plotando a média fora de controle.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_4_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="implementação-4" class="level3">
+<h3 class="anchored" data-anchor-id="implementação-4">Implementação</h3>
+<p>Seja um processo de controle onde se adotam limites de 3 desvios-padrões, isto é <span class="math inline">\(L=3\)</span>, usa-se <span class="math inline">\(n=5\)</span> e há um deslocamento de <span class="math inline">\(1,5\sigma\)</span>, isto é, <span class="math inline">\(k = 1,5\)</span>. Qual o risco de a próxima amostra não detectar o desvio?</p>
+<p>Deve-se resolver:</p>
+<p><span class="math display">\[
+\beta = \Phi(3-1,5\sqrt{5}) - \Phi(-3-1,5\sqrt{5})
+\]</span></p>
+<p>Resolvendo via R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="dv">3</span><span class="fl">-1.5</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">5</span>))<span class="sc">-</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">3</span><span class="fl">-1.5</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">5</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>beta</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3616312</code></pre>
+</div>
+</div>
+<p>Logo, a carta com <span class="math inline">\(L=3\)</span> e <span class="math inline">\(n=5\)</span> tem 0,36 de probabilidade de não detectar um desvio na primeira amostra após o problema. O comprimento médio da sequência para detectar o desvio, <span class="math inline">\(ARL_1\)</span> pode ser obtido conforme segue:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>beta)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.566493</code></pre>
+</div>
+</div>
+<p>Ou seja, entre uma ou duas amostras serão necessárias para detectar tal deslocamento.</p>
+<p>Seja um processo de controle onde se adotam limites de 3 desvios-padrões, isto é <span class="math inline">\(L=3\)</span>, usa-se <span class="math inline">\(n=3\)</span> e há um deslocamento de <span class="math inline">\(1\sigma\)</span>, isto é, <span class="math inline">\(k = 1\)</span>. Qual a probabilidade de a próxima amostra não detectar o desvio?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">3</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>L<span class="ot">=</span><span class="dv">3</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>k<span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(L<span class="sc">-</span>k<span class="sc">*</span><span class="fu">sqrt</span>(n)) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span>L<span class="sc">-</span>k<span class="sc">*</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>beta</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8975908</code></pre>
+</div>
+</div>
+<p>Qual o número médio de amostras para detectar tal desvio?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ARL1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>beta)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>ARL1</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.764752</code></pre>
+</div>
+</div>
 <section id="definição-do-desvio-padrão-amostral" class="level4">
 <h4 class="anchored" data-anchor-id="definição-do-desvio-padrão-amostral">1. Definição do Desvio Padrão Amostral</h4>
 <p>O desvio padrão amostral é definido como:</p>
@@ -797,6 +947,15 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <h3 class="anchored" data-anchor-id="verificação-numérica-em-r">Verificação Numérica em R</h3>
 <p>Podemos verificar o valor de <span class="math inline">\(c_4\)</span> para diferentes tamanhos amostrais:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função para calcular c4</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>c4 <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">/</span>(n<span class="dv">-1</span>)) <span class="sc">*</span> <span class="fu">gamma</span>(n<span class="sc">/</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">gamma</span>((n<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo para n = 5</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>c4_value <span class="ot">&lt;-</span> <span class="fu">c4</span>(n)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>c4_value</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9399856</code></pre>
 </div>
@@ -825,6 +984,36 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <section id="verificação-numérica-em-r-1" class="level4">
 <h4 class="anchored" data-anchor-id="verificação-numérica-em-r-1">4. Verificação Numérica em R</h4>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função para calcular c4</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>c4 <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">/</span>(n<span class="dv">-1</span>)) <span class="sc">*</span> <span class="fu">gamma</span>(n<span class="sc">/</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">gamma</span>((n<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulação para verificar a fórmula</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulação de amostras normais</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>s_values <span class="ot">&lt;-</span> <span class="fu">replicate</span>(nsim, {</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> sigma)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sd</span>(x)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Desvio padrão observado de s</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>observed_sd_s <span class="ot">&lt;-</span> <span class="fu">sd</span>(s_values)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Valor teórico</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>c4_val <span class="ot">&lt;-</span> <span class="fu">c4</span>(n)</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>theoretical_sd_s <span class="ot">&lt;-</span> sigma <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> c4_val<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparação</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">Observado =</span> observed_sd_s,</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>  Teórico <span class="ot">=</span> theoretical_sd_s,</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">Erro =</span> <span class="fu">abs</span>(observed_sd_s <span class="sc">-</span> theoretical_sd_s)</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Observado   Teórico         Erro
 1 0.4653479 0.4644736 0.0008743116</code></pre>
