@@ -476,6 +476,25 @@ Control limits:
 </div>
 <p>Realizando a implementação passo a passo (Atenção, aqui seria mais para entendimento e não para realização de prova, listas de exercícios e atuação profissional. Sugere-se usar extensivamente os pacotes, conforme feito inicialmente).</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>dados_tomate_sum <span class="ot">&lt;-</span> dados_tomate <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">subgrupo =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">xbarra =</span> <span class="fu">mean</span>(<span class="fu">c</span>(X1,X2,X3,X4,X5)),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">R =</span> <span class="fu">max</span>(<span class="fu">c</span>(X1,X2,X3,X4,X5))<span class="sc">-</span><span class="fu">min</span>(<span class="fu">c</span>(X1,X2,X3,X4,X5))) <span class="sc">|&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(subgrupo)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>dados_tomate_sum <span class="sc">|&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(subgrupo <span class="sc">&lt;=</span><span class="dv">25</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(subgrupo, R) <span class="sc">|&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(subgrupo, R)) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -485,6 +504,23 @@ Control limits:
 </div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>LC_R <span class="ot">&lt;-</span> <span class="fu">mean</span>(dados_tomate_sum<span class="sc">$</span>R)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>D3 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>D4 <span class="ot">&lt;-</span> <span class="fl">2.115</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>LIC_R <span class="ot">&lt;-</span> D3<span class="sc">*</span>LC_R</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>LSC_R <span class="ot">&lt;-</span> D4<span class="sc">*</span>LC_R</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dados_tomate_sum <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(subgrupo <span class="sc">&lt;=</span><span class="dv">25</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(subgrupo, R) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(subgrupo, R)) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fu">c</span>(LIC_R, LSC_R)) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fu">c</span>(LC_R), <span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -494,6 +530,12 @@ Control limits:
 </div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dados_tomate_sum <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(subgrupo <span class="sc">&lt;=</span><span class="dv">25</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(subgrupo, xbarra) <span class="sc">|&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(subgrupo, xbarra)) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -503,6 +545,22 @@ Control limits:
 </div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>LC_xbarra <span class="ot">&lt;-</span> <span class="fu">mean</span>(dados_tomate_sum<span class="sc">$</span>xbarra)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>A2 <span class="ot">&lt;-</span> <span class="fl">0.577</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>LIC_xbarra <span class="ot">&lt;-</span> LC_xbarra <span class="sc">-</span> A2<span class="sc">*</span>LC_R</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>LSC_xbarra <span class="ot">&lt;-</span> LC_xbarra <span class="sc">+</span> A2<span class="sc">*</span>LC_R</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dados_tomate_sum <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(subgrupo <span class="sc">&lt;=</span><span class="dv">25</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(subgrupo, xbarra) <span class="sc">|&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(subgrupo, xbarra)) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fu">c</span>(LIC_xbarra, LSC_xbarra)) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fu">c</span>(LC_xbarra), <span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -584,9 +642,9 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <h3 class="anchored" data-anchor-id="implementação-1">Implementação</h3>
 <p>Carta s.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cartaS_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">type=</span><span class="st">"S"</span>, </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">title =</span> <span class="st">"Carta S para a massa de conservas de tomate"</span>, <span class="at">ylab =</span> <span class="st">"S"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cartaS_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">type=</span><span class="st">"S"</span>, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">title =</span> <span class="st">"Carta S para a massa de conservas de tomate"</span>, <span class="at">ylab =</span> <span class="st">"S"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -597,10 +655,10 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 </div>
 <p>Carta x-barra com desvio-padrão da média estimado via média dos desvios-padrão.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cartaxbar_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-SD"</span>, </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>, </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cartaxbar_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-SD"</span>, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -620,10 +678,10 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <h3 class="anchored" data-anchor-id="implementação-2">Implementação</h3>
 <p>Carta R com dados futuros.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cartaR_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">newdata =</span> dados_tomate[<span class="dv">26</span><span class="sc">:</span><span class="dv">50</span>,],</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">type=</span><span class="st">"R"</span>, </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">title =</span> <span class="st">"Carta R para a massa de conservas de tomate"</span>, <span class="at">ylab =</span> <span class="st">"R"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cartaR_tomate <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">newdata =</span> dados_tomate[<span class="dv">26</span><span class="sc">:</span><span class="dv">50</span>,],</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">type=</span><span class="st">"R"</span>, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">title =</span> <span class="st">"Carta R para a massa de conservas de tomate"</span>, <span class="at">ylab =</span> <span class="st">"R"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -634,10 +692,10 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 </div>
 <p>Carta x-barra com dados futuros.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>xbarfuture <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], <span class="at">newdata =</span> dados_tomate[<span class="dv">26</span><span class="sc">:</span><span class="dv">50</span>,],</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-R"</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>xbarfuture <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], <span class="at">newdata =</span> dados_tomate[<span class="dv">26</span><span class="sc">:</span><span class="dv">50</span>,],</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-R"</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -648,10 +706,10 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 </div>
 <p>Carta x-barra com dados futuros sem dados da primeira fase.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>xbarfuture2 <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], <span class="at">newdata =</span> dados_tomate[<span class="dv">26</span><span class="sc">:</span><span class="dv">50</span>,],</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-SD"</span>, <span class="at">chart.all=</span><span class="cn">FALSE</span>,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>xbarfuture2 <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], <span class="at">newdata =</span> dados_tomate[<span class="dv">26</span><span class="sc">:</span><span class="dv">50</span>,],</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-SD"</span>, <span class="at">chart.all=</span><span class="cn">FALSE</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"x-barra"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -774,16 +832,16 @@ LIC =&amp;\text{ } \overline{\overline{x}} - A_3\overline s,\\
 <h3 class="anchored" data-anchor-id="implementação-3">Implementação</h3>
 <p>Carta x-barra com limites de aviso de 2 sigma.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cartaxbar <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-R"</span>, </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>, </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab =</span> <span class="st">"x-barra"</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>limites.aviso <span class="ot">&lt;-</span> <span class="fu">limits.xbar</span>(cartaxbar<span class="sc">$</span>center, cartaxbar<span class="sc">$</span>std.dev, cartaxbar<span class="sc">$</span>sizes, <span class="dv">2</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cartaxbar, <span class="at">restore.par =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> limites.aviso, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"orangered"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cartaxbar <span class="ot">&lt;-</span> <span class="fu">qcc</span>(dados_tomate[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,], </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type=</span><span class="st">"xbar"</span>, <span class="at">std.dev =</span> <span class="st">"UWAVE-R"</span>, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Carta x-barra para a massa de conservas de tomate"</span>, </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab =</span> <span class="st">"x-barra"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>limites.aviso <span class="ot">&lt;-</span> <span class="fu">limits.xbar</span>(cartaxbar<span class="sc">$</span>center, cartaxbar<span class="sc">$</span>std.dev, cartaxbar<span class="sc">$</span>sizes, <span class="dv">2</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cartaxbar, <span class="at">restore.par =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> limites.aviso, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"orangered"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -879,15 +937,15 @@ ARL_1 =  \frac{1}{1-\beta}.
 \]</span></p>
 <p>Resolvendo via R:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="dv">3</span><span class="fl">-1.5</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">5</span>))<span class="sc">-</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">3</span><span class="fl">-1.5</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">5</span>))</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>beta</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="dv">3</span><span class="fl">-1.5</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">5</span>))<span class="sc">-</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">3</span><span class="fl">-1.5</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">5</span>))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>beta</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3616312</code></pre>
 </div>
 </div>
 <p>Logo, a carta com <span class="math inline">\(L=3\)</span> e <span class="math inline">\(n=5\)</span> tem 0,36 de probabilidade de não detectar um desvio na primeira amostra após o problema. O comprimento médio da sequência para detectar o desvio, <span class="math inline">\(ARL_1\)</span> pode ser obtido conforme segue:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>beta)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>beta)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.566493</code></pre>
 </div>
@@ -895,47 +953,47 @@ ARL_1 =  \frac{1}{1-\beta}.
 <p>Ou seja, entre uma ou duas amostras serão necessárias para detectar tal deslocamento.</p>
 <p>Seja um processo de controle onde se adotam limites de 3 desvios-padrões, isto é <span class="math inline">\(L=3\)</span>, usa-se <span class="math inline">\(n=3\)</span> e há um deslocamento de <span class="math inline">\(1\sigma\)</span>, isto é, <span class="math inline">\(k = 1\)</span>. Qual a probabilidade de a próxima amostra não detectar o desvio?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">3</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>L<span class="ot">=</span><span class="dv">3</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>k<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(L<span class="sc">-</span>k<span class="sc">*</span><span class="fu">sqrt</span>(n)) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span>L<span class="sc">-</span>k<span class="sc">*</span><span class="fu">sqrt</span>(n))</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>beta</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">3</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>L<span class="ot">=</span><span class="dv">3</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>k<span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(L<span class="sc">-</span>k<span class="sc">*</span><span class="fu">sqrt</span>(n)) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span>L<span class="sc">-</span>k<span class="sc">*</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>beta</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8975908</code></pre>
 </div>
 </div>
 <p>Qual o número médio de amostras para detectar tal desvio?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ARL1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>beta)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>ARL1</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ARL1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>beta)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>ARL1</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.764752</code></pre>
 </div>
 </div>
 <p>Curva característica de operação:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parâmetros do processo</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">0</span>      <span class="co"># Média</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span>    <span class="co"># Desvio padrão</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>delta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)  <span class="co"># Mudança na média (em unidades de sigma)</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>n_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>)    <span class="co"># Tamanhos de amostra</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Função para calcular a probabilidade de não detectar a mudança (beta)</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>beta_prob <span class="ot">&lt;-</span> <span class="cf">function</span>(k, n, <span class="at">alpha =</span> <span class="fl">0.0027</span>) {</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pnorm</span>(<span class="dv">3</span> <span class="sc">-</span> k<span class="sc">*</span><span class="fu">sqrt</span>(n)) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">3</span> <span class="sc">-</span> k<span class="sc">*</span><span class="fu">sqrt</span>(n))</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">delta =</span> delta, <span class="at">n =</span> n_values)</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>beta <span class="ot">&lt;-</span> <span class="fu">mapply</span>(beta_prob, df<span class="sc">$</span>delta, df<span class="sc">$</span>n)</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> df<span class="sc">$</span>beta  <span class="co"># Poder do teste</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co"># CCO</span></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> delta, <span class="at">y =</span> beta, <span class="at">color =</span> <span class="fu">factor</span>(n))) <span class="sc">+</span></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#1f77b4"</span>, <span class="st">"#ff7f0e"</span>, <span class="st">"#2ca02c"</span>, <span class="st">"#d62728"</span>)) <span class="sc">+</span></span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mudança na média (kσ)"</span>, <span class="at">y =</span> <span class="st">"Probabilidade de não detectar (β)"</span>) <span class="sc">+</span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">col =</span> <span class="st">"n"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parâmetros do processo</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">0</span>      <span class="co"># Média</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span>    <span class="co"># Desvio padrão</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>delta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)  <span class="co"># Mudança na média (em unidades de sigma)</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>n_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>)    <span class="co"># Tamanhos de amostra</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Função para calcular a probabilidade de não detectar a mudança (beta)</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>beta_prob <span class="ot">&lt;-</span> <span class="cf">function</span>(k, n, <span class="at">alpha =</span> <span class="fl">0.0027</span>) {</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pnorm</span>(<span class="dv">3</span> <span class="sc">-</span> k<span class="sc">*</span><span class="fu">sqrt</span>(n)) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">3</span> <span class="sc">-</span> k<span class="sc">*</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">delta =</span> delta, <span class="at">n =</span> n_values)</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>beta <span class="ot">&lt;-</span> <span class="fu">mapply</span>(beta_prob, df<span class="sc">$</span>delta, df<span class="sc">$</span>n)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> df<span class="sc">$</span>beta  <span class="co"># Poder do teste</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="co"># CCO</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> delta, <span class="at">y =</span> beta, <span class="at">color =</span> <span class="fu">factor</span>(n))) <span class="sc">+</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#1f77b4"</span>, <span class="st">"#ff7f0e"</span>, <span class="st">"#2ca02c"</span>, <span class="st">"#d62728"</span>)) <span class="sc">+</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mudança na média (kσ)"</span>, <span class="at">y =</span> <span class="st">"Probabilidade de não detectar (β)"</span>) <span class="sc">+</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">col =</span> <span class="st">"n"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -981,15 +1039,15 @@ ARL_1 =  \frac{1}{1-\beta}.
 <h3 class="anchored" data-anchor-id="verificação-numérica-em-r">Verificação Numérica em R</h3>
 <p>Podemos verificar o valor de <span class="math inline">\(c_4\)</span> para diferentes tamanhos amostrais:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função para calcular c4</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>c4 <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">/</span>(n<span class="dv">-1</span>)) <span class="sc">*</span> <span class="fu">gamma</span>(n<span class="sc">/</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">gamma</span>((n<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo para n = 5</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>c4_value <span class="ot">&lt;-</span> <span class="fu">c4</span>(n)</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>c4_value</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função para calcular c4</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>c4 <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">/</span>(n<span class="dv">-1</span>)) <span class="sc">*</span> <span class="fu">gamma</span>(n<span class="sc">/</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">gamma</span>((n<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo para n = 5</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>c4_value <span class="ot">&lt;-</span> <span class="fu">c4</span>(n)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>c4_value</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9399856</code></pre>
 </div>
@@ -1018,36 +1076,36 @@ ARL_1 =  \frac{1}{1-\beta}.
 <section id="verificação-numérica-em-r-1" class="level4">
 <h4 class="anchored" data-anchor-id="verificação-numérica-em-r-1">4. Verificação Numérica em R</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função para calcular c4</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>c4 <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">/</span>(n<span class="dv">-1</span>)) <span class="sc">*</span> <span class="fu">gamma</span>(n<span class="sc">/</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">gamma</span>((n<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulação para verificar a fórmula</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulação de amostras normais</span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>s_values <span class="ot">&lt;-</span> <span class="fu">replicate</span>(nsim, {</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> sigma)</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sd</span>(x)</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Desvio padrão observado de s</span></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>observed_sd_s <span class="ot">&lt;-</span> <span class="fu">sd</span>(s_values)</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Valor teórico</span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>c4_val <span class="ot">&lt;-</span> <span class="fu">c4</span>(n)</span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>theoretical_sd_s <span class="ot">&lt;-</span> sigma <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> c4_val<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparação</span></span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">Observado =</span> observed_sd_s,</span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  Teórico <span class="ot">=</span> theoretical_sd_s,</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">Erro =</span> <span class="fu">abs</span>(observed_sd_s <span class="sc">-</span> theoretical_sd_s)</span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função para calcular c4</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>c4 <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">/</span>(n<span class="dv">-1</span>)) <span class="sc">*</span> <span class="fu">gamma</span>(n<span class="sc">/</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">gamma</span>((n<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulação para verificar a fórmula</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulação de amostras normais</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>s_values <span class="ot">&lt;-</span> <span class="fu">replicate</span>(nsim, {</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> sigma)</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sd</span>(x)</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Desvio padrão observado de s</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>observed_sd_s <span class="ot">&lt;-</span> <span class="fu">sd</span>(s_values)</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Valor teórico</span></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>c4_val <span class="ot">&lt;-</span> <span class="fu">c4</span>(n)</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>theoretical_sd_s <span class="ot">&lt;-</span> sigma <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> c4_val<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparação</span></span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">Observado =</span> observed_sd_s,</span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>  Teórico <span class="ot">=</span> theoretical_sd_s,</span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">Erro =</span> <span class="fu">abs</span>(observed_sd_s <span class="sc">-</span> theoretical_sd_s)</span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Observado   Teórico         Erro
 1 0.4653479 0.4644736 0.0008743116</code></pre>
