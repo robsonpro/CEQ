@@ -12,3 +12,5 @@ https://robsonpro.github.io/MOE/01-Dists.html
 ## Controle estatístico de variáveis
 https://robsonpro.github.io/CEQ/EQI_4.html
 
+## Capacidade de processos
+https://robsonpro.github.io/CEQ/EQI_5.html
