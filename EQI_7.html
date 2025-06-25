@@ -221,9 +221,8 @@ LIC =&amp; \overline p - 3\sqrt{\frac{\overline p(1-\overline p)}{n}} \\
 <li>Por fim, estimam-se os limites de controle.</li>
 </ul>
 </section>
-</section>
-<section id="implementação" class="level2">
-<h2 class="anchored" data-anchor-id="implementação">Implementação</h2>
+<section id="implementação" class="level3">
+<h3 class="anchored" data-anchor-id="implementação">Implementação</h3>
 <p>O suco de laranja concentrado congelado é embalado em latas de papelão. Essas latas são formadas em uma máquina, girando-as a partir de papel cartão e anexando um painel inferior de metal. Uma lata é então inspecionada para determinar se, quando cheia, o líquido poderia vazar na costura lateral ou ao redor da junta inferior. Se isso ocorrer, uma lata é considerada não conforme. Os dados foram coletados como 30 amostras de 50 latas cada em intervalos de meia hora durante um período de três turnos em que a máquina estava em operação contínua. Da amostra 15 usada, um novo lote de papel cartão foi colocado em produção. A amostra 23 foi obtida quando um operador inexperiente foi temporariamente designado para a máquina. Após as primeiras 30 amostras, um ajuste da máquina foi feito. Em seguida, mais 24 amostras foram retiradas do processo.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qcc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -306,6 +305,289 @@ LIC =&amp; \overline p - 3\sqrt{\frac{\overline p(1-\overline p)}{n}} \\
 </div>
 </div>
 </div>
+<p>O pacote qcc também tem funções simples para obtenção de curvas características de operação. Seja o caso das latas de suco de laranja antes e depois da melhoria no processo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">oc.curves</span>(q2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_7_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in oc.curves.p(object, ...): Some computed values for the type II error
+have been rounded due to the discreteness of the binomial distribution. Thus,
+some ARL values might be meaningless.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">oc.curves</span>(q4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_7_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in oc.curves.p(object, ...): Some computed values for the type II error
+have been rounded due to the discreteness of the binomial distribution. Thus,
+some ARL values might be meaningless.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>limits <span class="ot">&lt;-</span> <span class="fu">unname</span>(q2<span class="sc">$</span>limits[<span class="dv">1</span>,])</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>LIC <span class="ot">&lt;-</span> limits[<span class="dv">1</span>]<span class="sc">*</span><span class="dv">50</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>LSC <span class="ot">&lt;-</span> limits[<span class="dv">2</span>]<span class="sc">*</span><span class="dv">50</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(LSC, </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">50</span>, </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">prob =</span> <span class="fl">0.4</span>) <span class="sc">-</span> </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pbinom</span>(LIC<span class="dv">-1</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">size =</span> <span class="dv">50</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">prob =</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4464764</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="carta-np" class="level2">
+<h2 class="anchored" data-anchor-id="carta-np">carta np</h2>
+<p>Um procedimento simples pode ser realizado a partir da carta p para controlar o número de itens defeituosos por amostra ao invés da proporção de defeituosos. Para tal, usa-se a carta np com limites de controle obtidos conforme segue. Esta carta pode ser mais fácil de interpretar para não estatísticos, uma vez que cada ponto plotado consiste no número de itens defeituosos.</p>
+<p><span class="math display">\[
+\begin{align}
+LSC =&amp; np + 3\sqrt{np(1-\overline p)} \\
+LC  =&amp; np \\
+LIC =&amp; np - 3\sqrt{np(1-\overline p)} \\
+\end{align}
+\]</span></p>
+<p>De forma similar à carta p, caso p seja desconhecido, pode-se usar a média da proporção de defeituosos, <span class="math inline">\(\overline p\)</span>, das amostras da primeira fase para estimar tal parâmetro.</p>
+<section id="implementação-1" class="level3">
+<h3 class="anchored" data-anchor-id="implementação-1">Implementação</h3>
+<p>Seja o exemplo das latas de suco de laranja. Pode-se usar a carta np ao invés da p, à escolha do usuário.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>q5 <span class="ot">=</span> <span class="fu">qcc</span>(orangejuice30<span class="sc">$</span>D[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">23</span>)],</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>         orangejuice30<span class="sc">$</span>size[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">23</span>)],</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">type=</span><span class="st">"np"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"carta np para lata de polpa de suco de laranja"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_7_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="carta-p-para-tamanho-amostral-variável" class="level2">
+<h2 class="anchored" data-anchor-id="carta-p-para-tamanho-amostral-variável">Carta p para tamanho amostral variável</h2>
+<p>Para casos onde o tamanho amostral não é fixo, pode-se calcular os limites de controle conforme segue, onde <span class="math inline">\(n_i\)</span> consiste no tamanho amostral da i-ésima amostra.</p>
+<p><span class="math display">\[
+\begin{align}
+LSC =&amp; \overline p + 3\sqrt{\frac{\overline p(1-\overline p)}{n_i}} \\
+LC  =&amp; \overline p \\
+LIC =&amp; \overline p - 3\sqrt{\frac{\overline p(1-\overline p)}{n_i}} \\
+\end{align}
+\]</span></p>
+<section id="implementação-2" class="level3">
+<h3 class="anchored" data-anchor-id="implementação-2">Implementação</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dados_ordem <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"ordem_fornecimento.csv"</span>,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">header =</span> T)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados_ordem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Di ni
+1 100 12
+2  80  8
+3  80  6
+4 100  9
+5 110 10
+6 110 12</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>q6 <span class="ot">=</span> <span class="fu">qcc</span>(<span class="at">sizes =</span> dados_ordem<span class="sc">$</span>Di,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>         dados_ordem<span class="sc">$</span>ni,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">type=</span><span class="st">"p"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"carta p para ordens de compras"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_7_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="carta-c" class="level2">
+<h2 class="anchored" data-anchor-id="carta-c">Carta c</h2>
+<p>Suponha que defeitos ocorram em uma unidade de inspeção (um produto, ou um conjunto de produtos) segundo a distribuição Poisson, com parâmetro <span class="math inline">\(c\)</span>, e probabilidade de ocorrência de <span class="math inline">\(x\)</span> defeitos igual a:</p>
+<p><span class="math display">\[
+p(x) = \frac{e^{-c}c^x}{x!}.
+\]</span></p>
+<p>Na distribuição Poisson os parâmetros são:</p>
+<p><span class="math display">\[
+\begin{align}
+E(x)   =&amp; \mu_c = c \\
+Var(x) =&amp; \sigma_c^2 = c
+\end{align}
+\]</span></p>
+<p>Logo, a carta para número de defeitos por unidade tem limites calculados conforme segue. Se <span class="math inline">\(LCL&lt;0\)</span>, então LCL=0.</p>
+<p><span class="math display">\[
+\begin{align}
+LSC =&amp; c + 3 \sqrt c \\
+LC =&amp; c \\
+LIC =&amp; c - 3 \sqrt c
+\end{align}
+\]</span></p>
+<p>Caso o parâmetro <span class="math inline">\(c\)</span> seja desconhecido, este deve ser estimado como o número médio de defeitos em uma amostra preliminar, <span class="math inline">\(\overline c\)</span>. Os limites neste caso ficam:</p>
+<p><span class="math display">\[
+\begin{align}
+LSC =&amp; \overline c + 3 \sqrt{\overline c} \\
+LC =&amp; \overline c \\
+LIC =&amp; \overline c - 3 \sqrt{\overline c}
+\end{align}
+\]</span></p>
+<section id="implementação-3" class="level3">
+<h3 class="anchored" data-anchor-id="implementação-3">Implementação</h3>
+<p>Seja o número de defeitos observados em 26 amostras sucessivas cada uma com 100 placas de circuitos impressos. As amostras 6 e 20 estão fora dos limites de controle. A amostra 6 foi examinada por um novo inspetor, que não identificou diversos tipos de não conformidades que poderiam estar presentes. Além disso, o número anormalmente grande de não conformidades na amostra 20 resultou de um problema no controle de temperatura da máquina de solda por onda, que foi posteriormente reparada.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(circuit) </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>dados1 <span class="ot">&lt;-</span> circuit[<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>,]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>q7 <span class="ot">=</span> <span class="fu">qcc</span>(<span class="at">data =</span> dados1<span class="sc">$</span>x,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">sizes =</span> dados1<span class="sc">$</span>size,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">type=</span><span class="st">"c"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_7_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Uma vez que há causas atribuíveis às amostras 6 e 20, pode-se recalcular os limites desocnsiderando-as.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>q8 <span class="ot">=</span> <span class="fu">qcc</span>(<span class="at">data =</span> dados1[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">20</span>),]<span class="sc">$</span>x,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">sizes =</span> dados1[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">20</span>),]<span class="sc">$</span>size,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">type=</span><span class="st">"c"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_7_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>20 novas amostras foram inspecionadas sendo conveniente controlar a produção futura.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>dados2 <span class="ot">&lt;-</span> circuit[<span class="dv">27</span><span class="sc">:</span><span class="dv">46</span>,]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>q9 <span class="ot">=</span> <span class="fu">qcc</span>(<span class="at">data =</span> dados1[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">20</span>),]<span class="sc">$</span>x,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">sizes =</span> dados1[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">20</span>),]<span class="sc">$</span>size,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">newdata =</span> dados2<span class="sc">$</span>x,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">newsizes =</span> dados2<span class="sc">$</span>size,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">type=</span><span class="st">"c"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_7_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">oc.curves</span>(q8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_7_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in oc.curves.c(object, ...): Some computed values for the type II error
+have been rounded due to the discreteness of the Poisson distribution. Thus,
+some ARL values might be meaningless.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>limits <span class="ot">&lt;-</span> <span class="fu">unname</span>(q8<span class="sc">$</span>limits[<span class="dv">1</span>,])</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>LIC <span class="ot">&lt;-</span> limits[<span class="dv">1</span>] </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>LSC <span class="ot">&lt;-</span> limits[<span class="dv">2</span>]</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(LSC, </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">lambda =</span> <span class="dv">30</span>) <span class="sc">-</span> </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ppois</span>(LIC<span class="dv">-1</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">lambda =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6845412</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="carta-u" class="level2">
+<h2 class="anchored" data-anchor-id="carta-u">Carta u</h2>
+<p>A carta u pode ser usada para controle da taxa de ocorrência de defeitos por unidade de inspeção. Seja u, esta taxa, sendo calculada conforme segue:</p>
+<p><span class="math display">\[
+u_i = \frac{x_i}{n_i}
+\]</span></p>
+<p>Os limites de controle são calculados conforme segue. É importante neste caso considerar o tamanho amostral <span class="math inline">\(n\)</span> no cálculo do desvio-padrão, uma vez que a taxa é calculada considerando a contagem de defeitos em <span class="math inline">\(n\)</span> unidades inspecionadas.</p>
+<p><span class="math display">\[
+\begin{align}
+LSC =&amp; \overline u + 3 \sqrt{\frac {\overline u}{n}} \\
+LC =&amp; \overline u \\
+LIC =&amp; \overline u - 3 \sqrt{\frac {\overline u}{n}}
+\end{align}
+\]</span></p>
+<section id="implementação-4" class="level3">
+<h3 class="anchored" data-anchor-id="implementação-4">Implementação</h3>
+<p>Um fabricante de computadores contabiliza o número de não conformidades por unidade na linha de montagem final. Ele coleta dados de 20 amostras de 5 computadores cada.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(pcmanufact)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>q10 <span class="ot">=</span> <span class="fu">with</span>(pcmanufact, </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">qcc</span>(x, </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">sizes=</span>size, </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">type=</span><span class="st">"u"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_7_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ou então</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># q10 = qcc(pcmanufact$x,</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#           sizes=pcmanufact$size,</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#           type="u")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A carta u também pode ser usada para tamanhos amostrais variáveis.</p>
+<p>Seja uma planta de acabamento de tecidos, onde o tecido tingindo é inspecionado, sendo buscada a ocorrência de defeitos por rolos de distintas dimensões. A seguir é fornecida a área por rolo em metros quadrados e o número de defeitos identificados. Consideremos cada unidade de inspeção com tamanho 50 metros quadrados, tamanho este considerado para venda.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>tecidos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">area =</span> <span class="fu">c</span>(<span class="dv">500</span>,<span class="dv">400</span>,<span class="dv">650</span>,<span class="dv">500</span>,<span class="dv">475</span>,<span class="dv">500</span>,<span class="dv">600</span>,<span class="dv">525</span>,<span class="dv">600</span>,<span class="dv">625</span>),</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">defeitos =</span> <span class="fu">c</span>(<span class="dv">14</span>,<span class="dv">12</span>,<span class="dv">20</span>,<span class="dv">11</span>,<span class="dv">7</span>,<span class="dv">10</span>,<span class="dv">21</span>,<span class="dv">16</span>,<span class="dv">19</span>,<span class="dv">23</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>tecidos<span class="sc">$</span>rolos <span class="ot">&lt;-</span> tecidos<span class="sc">$</span>area<span class="sc">/</span><span class="dv">50</span> </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>q11 <span class="ot">=</span> <span class="fu">with</span>(tecidos, </span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">qcc</span>(defeitos, </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">sizes=</span>rolos, </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">type=</span><span class="st">"u"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EQI_7_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 
 </main>
