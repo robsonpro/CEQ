@@ -18,6 +18,6 @@ https://robsonpro.github.io/CEQ/EQI_5.html
 ## Carta para valores individuais
 https://robsonpro.github.io/CEQ/EQI_6.html
 
-## Cartas para variáveis
+## Cartas para atributos
 https://robsonpro.github.io/CEQ/EQI_7.html
 
